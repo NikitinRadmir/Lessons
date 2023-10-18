@@ -1,0 +1,17 @@
+double x = double.Parse(Console.ReadLine());
+Console.WriteLine(Pow3(x, 0.00001));
+static double Pow3(double x, double eps = 0.0001)
+{
+    double check = Math.Pow(3, x);
+    double res = 1;
+    double m = 1, n = 1;
+    double log = Math.Log(3);
+    while (Math.Abs(check - res) > eps)
+    {
+        m *= x * log / n;
+        n++;
+        res += m;
+    }
+    Console.WriteLine(n);
+    return res;
+}
