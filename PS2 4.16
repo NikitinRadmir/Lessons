@@ -1,0 +1,84 @@
+int segmentsCount = 1000;
+double lowerLimit = -1, upperLimit = 1, result = 1.31956;
+
+static double Function(double x)
+{
+    return Math.Cos(Math.Cos(x));
+}
+
+static double LeftRectangles(double lowerLimit, double upperLimit, int segmentsCount)
+{
+    double sum = 0.0;
+    double segmentLenght = (upperLimit - lowerLimit) / segmentsCount;
+    for (int i = 0; i < segmentsCount; i++)
+    {
+        sum += segmentLenght * Function(lowerLimit + i * segmentLenght);
+    }
+    return sum;
+}
+
+static double RightRectangles(double lowerLimit, double upperLimit, int segmentsCount)
+{
+    double sum = 0.0;
+    double segmentLenght = (upperLimit - lowerLimit) / segmentsCount;
+    for (int i = 0; i < segmentsCount; i++)
+    {
+        sum += segmentLenght * Function(lowerLimit + (i + 1) * segmentLenght);
+    }
+    return sum;
+}
+
+static double Trapezium(double lowerLimit, double upperLimit, double segmentsCount)
+{
+    double x, segmentLenght, f;
+    segmentLenght = (upperLimit - lowerLimit) / segmentsCount;
+    f = (Function(lowerLimit) + Function(upperLimit)) / 2;
+    for (x = lowerLimit + segmentLenght; x < upperLimit; x += segmentLenght)
+    {
+        f += Function(x);
+    }
+    return f * segmentLenght;
+}
+
+static double Simpson(double lowerLimit, double upperLimit, int segmentsCount)
+{
+    double segmentLenght = (upperLimit - lowerLimit) / segmentsCount;
+    double sum1 = 0, sum2 = 0;
+    for (int i = 1; i <= segmentsCount; i++)
+    {
+        var x0 = lowerLimit + i * segmentLenght;
+        if (i <= segmentsCount - 1)
+        {
+            sum1 += Function(x0);
+        }
+
+        var x1 = lowerLimit + (i - 1) * segmentLenght;
+        sum2 += Function((x0 + x1) / 2);
+    }
+
+    var result = segmentLenght / 3 * (1 / 2 * Function(lowerLimit) + sum1 + 2 * sum2 + 1 / 2 * Function(upperLimit));
+    return result;
+}
+
+static double MonteCarlo(double lowerLimit, double upperLimit, int segmentsCount)
+{
+    Random r = new Random();
+    double segmentLenght = (upperLimit - lowerLimit) / segmentsCount;
+    double sum = 0;
+    for (var i = 1; i <= segmentsCount; i++)
+    {
+        sum += Function(r.Next((int)lowerLimit * 10, (int)upperLimit * 10) / 10.0);
+    }
+    return sum * (upperLimit - lowerLimit) / segmentsCount;
+}
+
+Console.WriteLine($"Интерграл функции по методу левых прямоугольников равен = {LeftRectangles(lowerLimit, upperLimit, segmentsCount)}; " +
+    $"Погрешность вычислений: {LeftRectangles(lowerLimit, upperLimit, segmentsCount) - result}");
+Console.WriteLine($"Интерграл функции по методу правых прямоугольников получилось = {RightRectangles(lowerLimit, upperLimit, segmentsCount)}; " +
+    $"Погрешность вычислений: {RightRectangles(lowerLimit, upperLimit, segmentsCount) - result}");
+Console.WriteLine($"Интерграл функции по методу трапеций получилось = {Trapezium(lowerLimit, upperLimit, segmentsCount)}; " +
+    $"Погрешность вычислений: {Trapezium(lowerLimit, upperLimit, segmentsCount) - result}");
+Console.WriteLine($"Интерграл функции по методу Симпсона получилось = {Simpson(lowerLimit, upperLimit, segmentsCount)}; " +
+    $"Погрешность вычислений: {Simpson(lowerLimit, upperLimit, segmentsCount) - result}");
+Console.WriteLine($"Интерграл функции по методу Монте-Карла получилось = {MonteCarlo(lowerLimit, upperLimit, segmentsCount)}; " +
+    $"Погрешность вычислений: {MonteCarlo(lowerLimit, upperLimit, segmentsCount) - result}");
