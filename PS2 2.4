@@ -1,0 +1,16 @@
+Console.WriteLine(Pi(0.0001));
+Console.WriteLine(Math.PI);
+static double Pi(double eps)
+{
+    double check = Math.PI;
+    double res = 0;
+    double m = 1, k = 1;
+    double log = Math.Log(2);
+    while (Math.Abs(check - 8 * res - 2 * log) > eps)
+    {
+        m = 1 / (4 * k - 2) / (4 * k - 1);
+        k++;
+        res += m;
+    }
+    return 8 * res + 2 * log;
+}
