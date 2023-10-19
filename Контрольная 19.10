@@ -1,0 +1,93 @@
+// 1 var
+
+// N1 
+
+/*Console.WriteLine("Введите значения массива");
+int[] arr = new int[10];
+for (int i = 0; i < arr.Length; i++)
+    arr[i] = Convert.ToInt32(Console.ReadLine());
+int max = -10000, min = 10000, sum = 0, maxi = 0, mini = 0;
+for (int i = 0; i < arr.Length; i++)
+{
+    if (arr[i] > max)
+    {
+        max = arr[i];
+        maxi = i;
+    }
+    if (arr[i] < min)
+    {
+        min = arr[i];
+        mini = i;
+    }
+}
+
+for (int i = Math.Min(mini, maxi) + 1; i < Math.Max(mini, maxi); i++)
+{
+    sum += arr[i];
+}
+Console.WriteLine($"Сумма между min и max = {sum}");*/
+
+// N2
+
+/*int[] arr = { 1, 2, 1, 2, 3, 2, 5 };
+int mlen = 1, len = 1; 
+
+for (int i = 0; i < arr.Length - 1; i++)
+{
+    if (arr[i] < arr[i + 1]) // строгое возрастание
+    {
+        len++; 
+    }
+    else
+    {
+        if (len > mlen) 
+        {
+            mlen = len; 
+        }
+        len = 1; 
+    }
+}
+
+if (len > mlen) 
+{
+    mlen = len; 
+}
+
+Console.WriteLine($"Длина самой длинной возрастающей цепочки в массиве = {mlen}"); */
+
+// N3
+
+/*Console.WriteLine("Введите размерность матрицы");
+int n = Convert.ToInt32(Console.ReadLine());
+int[,] matrix = new int[n, n];
+Random r = new Random();
+Console.WriteLine("Вид матрицы:");
+for (int i = 0; i < matrix.GetLength(0); i++)
+{
+    for (int j = 0; j < matrix.GetLength(1); j++)
+    {
+        matrix[i, j] = r.Next(10);
+        Console.Write(matrix[i, j] + " ");
+    }
+    Console.WriteLine();
+}
+
+for (int i = 0; i < matrix.GetLength(0); i++) 
+{
+    for (int j = i + 1; j < matrix.GetLength(1); j++) 
+    {
+        int xt = matrix[i, j]; 
+        matrix[i, j] = matrix[j, i]; 
+        matrix[j, i] = xt;
+    }
+}
+
+Console.WriteLine("Транспонированная матрица:");
+for (int i = 0; i < matrix.GetLength(0); i++)
+{
+    for (int j = 0; j < matrix.GetLength(1); j++)
+    {
+        Console.Write(matrix[i, j] + " ");
+    }
+    Console.WriteLine();
+}*/
