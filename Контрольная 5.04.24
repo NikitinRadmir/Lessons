@@ -1,0 +1,66 @@
+// Var 4 
+// Number 4
+Console.WriteLine("----------N4----------");
+Dictionary<string,int> fruits = new Dictionary<string,int>(); 
+fruits.Add("бананчики", 6);
+fruits.Add("яблочки", 12);
+fruits.Add("персики", 3);
+fruits.Add("ананасы", 1488);
+fruits.Add("киви", 1);
+fruits.Add("апельсины", 20);
+// хотел записать Колю, но он овощь а не фрукт ((
+
+Console.WriteLine("Исходный словарь:");
+foreach (var fruit in fruits)
+{
+    Console.WriteLine($"{fruit.Key}: {fruit.Value}");
+}
+Console.WriteLine();
+
+fruits = fruits //удаление 
+    .Where(fruit => fruit.Value <= 10)
+    .ToDictionary(fruit => fruit.Key, fruit => fruit.Value);
+
+Console.WriteLine("Словарь после изменений:");
+foreach (var fruit in fruits)
+{
+    Console.WriteLine($"{fruit.Key}: {fruit.Value}");
+}
+Console.WriteLine();
+
+
+
+// Number 5
+Console.WriteLine("----------N5----------");
+static T[] MergeArrays<T>(T[] arr1, T[] arr2)
+{
+    T[] newArray = new T[arr1.Length + arr2.Length];
+
+    Array.Copy(arr1, 0, newArray, 0, arr1.Length);
+    Array.Copy(arr2, 0, newArray, arr1.Length, arr2.Length);
+
+    return newArray;
+}
+
+int[] intArray1 = { 1, 2, 3 }; //для int
+int[] intArray2 = { 4, 5, 6 };
+int[] newIntArray = MergeArrays(intArray1, intArray2);
+
+Console.WriteLine("Новый массив чисел:");
+foreach (var item in newIntArray)
+{
+    Console.Write($"{item} ");
+}
+Console.WriteLine();
+Console.WriteLine();
+
+string[] stringArray1 = { "Коля", "нет" }; // для string
+string[] stringArray2 = { "Денис", "щавель" };
+string[] newStringArray = MergeArrays(stringArray1, stringArray2);
+
+Console.WriteLine("Новый массив строк:");
+foreach (var item in newStringArray)
+{
+    Console.Write($"{item} ");
+}
+Console.WriteLine();
