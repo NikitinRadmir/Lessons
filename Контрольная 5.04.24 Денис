@@ -1,0 +1,50 @@
+// вариант 3
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // main для №4
+        List<string> words = new List<string> { "Коля", "Радмир", "банан", "человек", "БредПит" };
+        string substring = Console.ReadLine();
+        int count = 0;
+        foreach (var word in words)
+        {
+            if (word.Contains(substring))
+            {
+                Console.WriteLine(word);
+                count++;
+            }
+            
+            
+        }
+        if (count == 0)
+            Console.WriteLine("таких слов нет");
+
+        Console.WriteLine("--------------------");
+        Console.WriteLine("--------------------");
+        
+        // main для №5
+        List<string> wordss = new List<string> { "Коля", "Радмир", "банан", "человек", "net" };
+
+        // делегат Predicate<string> 
+        Predicate<string> filter = (string word) => word.Length > 14; // Условие: слово длиннее 4 символов
+
+        string lastWord = Last(wordss, filter);
+
+        Console.WriteLine("последнее слово: " + lastWord);
+        
+        // метод Last<T>
+        static T Last<T>(List<T> list, Predicate<T> filter)
+        {
+            //прохожу по списку и ищу последний элемент, удовлетворяющий условию, что длиннее 4 символов
+            for (int i = list.Count - 1; i >= 0; i--)
+            {
+                if (filter(list[i]))
+                    return list[i];
+            }
+
+            throw new InvalidOperationException("Элемент не найден");
+        }
+    }
+}
